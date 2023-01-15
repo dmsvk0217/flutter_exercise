@@ -115,7 +115,71 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 ],
               ),
-              makeMenuBotton(),
+              Container(
+                  color: Colors.black26,
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: InkWell(
+                          onTap: () {},
+                          child: Column(
+                            children: [
+                              widget.movie.like
+                                  ? Icon(Icons.check)
+                                  : Icon(Icons.add),
+                              Padding(
+                                padding: EdgeInsets.all(5),
+                              ),
+                              Text(
+                                '내가 찜한 콘텐츠',
+                                style: TextStyle(
+                                    fontSize: 11, color: Colors.white60),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: Container(
+                          child: Column(
+                            children: [
+                              Icon(Icons.thumb_up),
+                              Padding(
+                                padding: EdgeInsets.all((5)),
+                              ),
+                              Text(
+                                '평가',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: Colors.white60,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: Container(
+                          child: Column(
+                            children: [
+                              Icon(Icons.send),
+                              Padding(padding: EdgeInsets.all((5))),
+                              Text(
+                                '공유',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: Colors.white60,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ))
             ],
           ),
         ),
