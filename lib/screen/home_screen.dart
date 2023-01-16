@@ -22,8 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _fetchData(BuildContext context) {
+    var movieSnapshot =
+        FirebaseFirestore.instance.collection('movie').snapshots();
+
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('movie').snapshots(),
+      stream: movieSnapshot,
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
         return _buildBody(context, snapshot.data!.docs);
@@ -31,8 +34,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+//collection('movie').snapshots().data!.docs.data()를 map으로 바꿔 Movie 객채로 반환
+
   Widget _buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Movie> movies = snapshot.map((e) => Movie.fromSnapshot(e)).toList();
+    //int a = 1;
+    // List<Movie> movies = snapshot.map((e) {
+    //   print(a++);
+    //   print(e.data());
+    //   return Movie.fromSnapshot(e);
+    // }).toList();
     return Column(
       children: [
         TopBar(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/model/model_movie.dart';
 import 'package:flutter_application/screen/detail_screen.dart';
+import 'package:get/get.dart';
 
 class BoxSlider extends StatelessWidget {
   final List<Movie> movies;
@@ -33,14 +34,7 @@ List<Widget> makeBoxImages(BuildContext context, List<Movie> movies) {
     results.add(
       InkWell(
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute<Null>(
-              fullscreenDialog: true,
-              builder: (BuildContext content) {
-                return DetailScreen(movie: movies[i]);
-              },
-            ),
-          );
+          Get.to(() => DetailScreen(movie: movies[i]));
         },
         child: Container(
           padding: EdgeInsets.only(right: 10),
