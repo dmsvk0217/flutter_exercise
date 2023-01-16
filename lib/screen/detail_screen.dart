@@ -108,6 +108,9 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                   Positioned(
                     child: AppBar(
+                      iconTheme: IconThemeData(
+                        color: Colors.red, //색변경
+                      ),
                       backgroundColor: Colors.transparent,
                       elevation: 0,
                     ),

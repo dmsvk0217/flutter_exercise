@@ -65,18 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return _fetchData(context);
-    // return ListView(
-    //   children: [
-    //     Stack(
-    //       children: [
-    //         CarouselImage(movies: movies),
-    //         TopBar(),
-    //       ],
-    //     ),
-    //     CircleSlider(movies: movies),
-    //     BoxSlider(movies: movies)
-    //   ],
-    // );
   }
 }
 

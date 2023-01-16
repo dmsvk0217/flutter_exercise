@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screen/home_screen.dart';
+import 'package:flutter_application/screen/like_screen.dart';
 import 'package:flutter_application/screen/profile.dart';
 import 'package:flutter_application/screen/search_screen.dart';
 import 'package:flutter_application/widget/bottom_bar.dart';
@@ -24,6 +25,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Netflex',
       theme: ThemeData(
         // brightness: Brightness.dark,
+        backgroundColor: Colors.black,
         primaryColor: Colors.black,
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
             .copyWith(secondary: Colors.blueAccent),
@@ -37,9 +39,7 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               HomeScreen(),
               SearchScreen(),
-              Container(
-                child: Center(child: Text('save')),
-              ),
+              LikeScreen(),
               ProfileScreen(),
             ],
           ),
