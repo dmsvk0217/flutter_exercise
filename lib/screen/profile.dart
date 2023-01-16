@@ -100,12 +100,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-            Text(inputText),
             TextField(
               controller: controller,
               onChanged: (text) {
                 setState(() {
-                  //inputText = controller.text;
+                  inputText = controller.text;
                 });
               },
             ),

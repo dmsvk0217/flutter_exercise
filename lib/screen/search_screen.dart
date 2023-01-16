@@ -67,7 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(30),
+            padding: EdgeInsets.all(10),
           ),
           Container(
             color: Colors.black,
@@ -79,7 +79,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: TextField(
                     focusNode: focusNode,
                     style: TextStyle(fontSize: 15),
-                    autofocus: true,
+                    autofocus: false,
                     controller: _filter,
                     decoration: InputDecoration(
                       filled: true,
@@ -102,7 +102,6 @@ class _SearchScreenState extends State<SearchScreen> {
                             )
                           : Container(),
                       hintText: '검색',
-                      labelStyle: TextStyle(color: Colors.white),
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.transparent),
                           borderRadius:
