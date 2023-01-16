@@ -38,12 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Movie> movies = snapshot.map((e) => Movie.fromSnapshot(e)).toList();
-    //int a = 1;
-    // List<Movie> movies = snapshot.map((e) {
-    //   print(a++);
-    //   print(e.data());
-    //   return Movie.fromSnapshot(e);
-    // }).toList();
     return Column(
       children: [
         TopBar(),

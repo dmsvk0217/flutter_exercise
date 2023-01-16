@@ -19,7 +19,7 @@ class CircleSlider extends StatelessWidget {
             height: 120,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: makeCircleImages(context, movies),
+              children: makeCircleImages(movies),
             ),
           )
         ],
@@ -28,7 +28,7 @@ class CircleSlider extends StatelessWidget {
   }
 }
 
-List<Widget> makeCircleImages(BuildContext context, List<Movie> movies) {
+List<Widget> makeCircleImages(List<Movie> movies) {
   List<Widget> results = [];
   for (var i = 0; i < movies.length; i++) {
     results.add(
