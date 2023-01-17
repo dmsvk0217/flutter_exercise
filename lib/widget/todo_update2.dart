@@ -1,9 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/model/model_todo.dart';
 import 'package:get/get.dart';
 
-class createWidget extends StatelessWidget {
+class UpdateWidget2 extends StatelessWidget {
+  Todo todo;
+  UpdateWidget2({required this.todo});
+
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
 
@@ -13,7 +15,7 @@ class createWidget extends StatelessWidget {
       content: Container(
         child: Column(
           children: [
-            Text("Todo 등록하기"),
+            Text("Todo 수정하기"),
             TextField(
               controller: _titleController,
               decoration: InputDecoration(labelText: 'title'),
@@ -30,16 +32,12 @@ class createWidget extends StatelessWidget {
           child: TextButton(
             onPressed: () {
               Map<String, dynamic> newTodo = new Todo(
-                      _titleController.text, _contentController.text, false)
+                      _titleController.text, _contentController.text, todo.done)
                   .toMap();
-              FirebaseFirestore.instance
-                  .collection("todo")
-                  .add(newTodo)
-                  .whenComplete(() {
-                Get.back();
-              });
+              print(newTodo);
+              todo.reference?.update(newTodo).whenComplete(() => Get.back());
             },
-            child: Text("등록하기"),
+            child: Text("수정하기"),
           ),
         )
       ],

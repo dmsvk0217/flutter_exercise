@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/model/model_todo.dart';
 import 'package:flutter_application/widget/todo_create.dart';
+import 'package:flutter_application/widget/todo_update.dart';
+import 'package:flutter_application/widget/todo_update2.dart';
 import 'package:get/get.dart';
 
 class CrudScreen extends StatefulWidget {
@@ -45,8 +47,13 @@ class _CrudScreenState extends State<CrudScreen> {
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: InkWell(
-        onTap: () {
-          // Get.to(() => todoDetail());
+        onTap: () async {
+          return await showDialog(
+            context: context,
+            builder: (context) {
+              return UpdateWidget2(todo: todo);
+            },
+          );
         },
         child: Row(
           children: [
@@ -92,7 +99,7 @@ class _CrudScreenState extends State<CrudScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Stack(
+      child: Column(
         children: [
           _buildBody(),
           Container(
@@ -100,7 +107,6 @@ class _CrudScreenState extends State<CrudScreen> {
             padding: EdgeInsets.all(20),
             child: FloatingActionButton(
               onPressed: () async {
-                // Get.to(() => ());
                 return await showDialog(
                   context: context,
                   builder: (context) {

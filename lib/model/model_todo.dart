@@ -10,17 +10,17 @@ class Todo {
     return done;
   }
 
-  Todo(String title, String content) {
+  Todo(String title, String content, bool done) {
     this.title = title;
     this.content = content;
-    this.done = false;
+    this.done = done;
   }
 
   Map<String, dynamic> toMap() {
     return {
       'title': this.title,
       'content': this.content,
-      'done': false,
+      'done': this.done,
     };
   }
 
