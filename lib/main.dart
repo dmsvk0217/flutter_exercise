@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/screen/crud_screen.dart';
 import 'package:flutter_application/screen/home_screen.dart';
 import 'package:flutter_application/screen/like_screen.dart';
 import 'package:flutter_application/screen/profile.dart';
@@ -41,7 +42,7 @@ class _MyAppState extends State<MyApp> {
               HomeScreen(),
               SearchScreen(),
               LikeScreen(),
-              ProfileScreen(),
+              CrudScreen(),
             ],
           ),
           bottomNavigationBar: Bottom(),
