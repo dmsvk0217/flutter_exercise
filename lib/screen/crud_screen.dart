@@ -51,7 +51,7 @@ class _CrudScreenState extends State<CrudScreen> {
           return await showDialog(
             context: context,
             builder: (context) {
-              return UpdateWidget2(todo: todo);
+              return UpdateWidget(todo: todo);
             },
           );
         },

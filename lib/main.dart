@@ -6,6 +6,7 @@ import 'package:flutter_application/screen/like_screen.dart';
 import 'package:flutter_application/screen/profile.dart';
 import 'package:flutter_application/screen/search_screen.dart';
 import 'package:flutter_application/widget/bottom_bar.dart';
+import 'package:flutter_application/widget/test.dart';
 import 'package:get/route_manager.dart';
 
 void main() async {
@@ -34,14 +35,14 @@ class _MyAppState extends State<MyApp> {
       ),
       home: DefaultTabController(
         length: 4,
-        initialIndex: 0,
+        initialIndex: 2,
         child: Scaffold(
           body: TabBarView(
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               HomeScreen(),
               SearchScreen(),
-              LikeScreen(),
+              GetXState(),
               CrudScreen(),
             ],
           ),
