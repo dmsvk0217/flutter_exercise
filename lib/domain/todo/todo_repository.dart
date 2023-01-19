@@ -37,10 +37,10 @@ class TodoRepository {
   }
 
 //create
-  Future<int> create(Todo newTodo) async {
+  Future<Todo> create(Todo newTodo) async {
     DocumentSnapshot result = await _todoProvider.create(newTodo);
     Todo todo = Todo.fromSnapshot(result);
-    return todo.id != null ? 1 : -1;
+    return todo;
   }
 
 //update
