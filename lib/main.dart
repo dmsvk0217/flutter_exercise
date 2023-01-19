@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: DefaultTabController(
         length: 4,
-        initialIndex: 2,
+        initialIndex: 3,
         child: Scaffold(
           body: TabBarView(
             physics: NeverScrollableScrollPhysics(),

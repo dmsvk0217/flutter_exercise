@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/model/model_todo.dart';
 
 class UpdateWidget extends StatefulWidget {
   final todo;

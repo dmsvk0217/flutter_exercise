@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/model/model_todo.dart';
+import 'package:flutter_application/controller/todo_controller.dart';
+import 'package:flutter_application/domain/todo/todo.dart';
+import 'package:flutter_application/widget/UpdateTotoDialog.dart';
 import 'package:flutter_application/widget/todo_create.dart';
-import 'package:flutter_application/widget/todo_update.dart';
-import 'package:flutter_application/widget/todo_update2.dart';
 import 'package:get/get.dart';
 
 class CrudScreen extends StatefulWidget {
@@ -13,86 +12,71 @@ class CrudScreen extends StatefulWidget {
 
 class _CrudScreenState extends State<CrudScreen> {
   List<bool> doneList = [];
-
-  _CrudScreenState() {
-    initState();
-  }
+  final TodoController _todoController = Get.put(TodoController());
 
   Widget _buildBody() {
+    // return StreamBuilder(
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('todo').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-        return _buildList(snapshot.data!.docs);
-      },
-    );
-  }
+      stream: _todoController.getAllStream(),
+      builder: (BuildContext context, AsyncSnapshot<List<Todo>> snapshot) {
+        if (snapshot.hasError || !snapshot.hasData)
+          return LinearProgressIndicator();
 
-  Widget _buildList(List<DocumentSnapshot> snapshot) {
-    List<Todo> todoList = snapshot.map((e) => Todo.fromSnapshot(e)).toList();
-
-    return Expanded(
-      child: ListView(
-        children: snapshot.map((data) => _buildListItem(data)).toList(),
-      ),
-    );
-  }
-
-  Widget _buildListItem(DocumentSnapshot data) {
-    final todo = Todo.fromSnapshot(data);
-    var done = todo.done;
-
-    return Container(
-      color: Colors.grey,
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-      child: InkWell(
-        onTap: () async {
-          return await showDialog(
-            context: context,
-            builder: (context) {
-              return UpdateWidget(todo: todo);
-            },
-          );
-        },
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(todo.title),
-                  Text(todo.content),
-                ],
-              ),
-            ),
-            done
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        done = !done;
-                        todo.reference?.update({"done": !todo.done});
-                      });
-                    },
-                    icon: Icon(Icons.check),
-                  )
-                : IconButton(
-                    onPressed: () {
-                      setState(() {
-                        done = !done;
-                        todo.reference?.update({"done": !todo.done});
-                      });
-                    },
-                    icon: Icon(Icons.close),
+        return Expanded(
+          child: ListView.builder(
+            itemCount: snapshot.data!.length,
+            itemBuilder: (BuildContext context, int index) {
+              Todo todo = snapshot.data![index];
+              return Container(
+                color: Colors.green,
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                child: InkWell(
+                  onTap: () async {
+                    return await showDialog(
+                        context: context,
+                        builder: ((context) {
+                          return UpdateTotoDialog(todo: todo);
+                        }));
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            children: [
+                              Text(todo.title!),
+                              Text(todo.content!),
+                            ],
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          print("push update");
+                          print(todo.done);
+                          todo.reference!.update({"done": !todo.done!});
+                        },
+                        icon:
+                            todo.done! ? Icon(Icons.check) : Icon(Icons.cancel),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          print("onPressed : ${todo.id!}");
+                          // _todoController.deleteById(todo.id!);
+                          _todoController.deleteByReference(todo.reference!);
+                        },
+                        icon: Icon(Icons.delete),
+                      ),
+                    ],
                   ),
-            IconButton(
-                onPressed: () {
-                  todo.reference?.delete();
-                },
-                icon: Icon(Icons.delete)),
-          ],
-        ),
-      ),
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 

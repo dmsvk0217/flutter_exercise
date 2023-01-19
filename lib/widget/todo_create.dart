@@ -1,11 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/model/model_todo.dart';
+import 'package:flutter_application/controller/todo_controller.dart';
+import 'package:flutter_application/domain/todo/todo.dart';
 import 'package:get/get.dart';
 
 class createWidget extends StatelessWidget {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
+  final TodoController _todoController = Get.put(TodoController());
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +29,17 @@ class createWidget extends StatelessWidget {
       actions: [
         Center(
           child: TextButton(
-            onPressed: () {
-              Map<String, dynamic> newTodo = new Todo(
-                      _titleController.text, _contentController.text, false)
-                  .toMap();
-              FirebaseFirestore.instance
-                  .collection("todo")
-                  .add(newTodo)
-                  .whenComplete(() {
+            onPressed: () async {
+              Todo newTodo = new Todo(
+                  title: _titleController.text,
+                  content: _contentController.text,
+                  done: false);
+              int result = await _todoController.create(newTodo);
+              if (result == 1) {
                 Get.back();
-              });
+              } else {
+                print("[_todoController.create] 오류 발생");
+              }
             },
             child: Text("등록하기"),
           ),

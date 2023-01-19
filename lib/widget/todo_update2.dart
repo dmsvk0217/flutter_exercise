@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/model/model_todo.dart';
+import 'package:flutter_application/domain/todo/todo.dart';
 import 'package:get/get.dart';
 
 class UpdateWidget2 extends StatelessWidget {
@@ -32,7 +32,9 @@ class UpdateWidget2 extends StatelessWidget {
           child: TextButton(
             onPressed: () {
               Map<String, dynamic> newTodo = new Todo(
-                      _titleController.text, _contentController.text, todo.done)
+                      title: _titleController.text,
+                      content: _contentController.text,
+                      done: false)
                   .toMap();
               print(newTodo);
               todo.reference?.update(newTodo).whenComplete(() => Get.back());
