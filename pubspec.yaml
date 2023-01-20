@@ -92,6 +92,17 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+  fonts:
+    - family: nanum
+      fonts:
+        - asset: asset/font/NanumMyeongjo-Regular.ttf
+          weight: 100
+        - asset: asset/font/NanumMyeongjo-Bold.ttf
+          weight: 200
+        - asset: asset/font/NanumMyeongjo-ExtraBold.ttf
+          weight: 300
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
