@@ -2,6 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screen/random_number/colors.dart';
+import 'package:flutter_application/screen/random_number/number_row.dart';
+import 'package:flutter_application/screen/random_number/setting_screen.dart';
+import 'package:get/get.dart';
 
 class RandomHomescreen extends StatefulWidget {
   const RandomHomescreen({super.key});
@@ -11,9 +14,23 @@ class RandomHomescreen extends StatefulWidget {
 }
 
 class _RandomHomescreenState extends State<RandomHomescreen> {
-  List<int> randomNumber = [123, 456, 789];
+  List<int> randomNumber = [];
+  int targetNumber = 1000;
+
+  @override
+  void initState() {
+    super.initState();
+    randomNumber = [123, 456, 789];
+    print("initState");
+  }
+
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      if (Get.arguments != null) {
+        targetNumber = Get.arguments.result;
+      }
+    });
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -22,7 +39,7 @@ class _RandomHomescreenState extends State<RandomHomescreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _top(),
+              _top(targetNumber, setTargetNumber),
               _buildRandomNumber(randomNumber),
               _button(pushButton),
             ],
@@ -36,10 +53,16 @@ class _RandomHomescreenState extends State<RandomHomescreen> {
     final rand = Random();
     Set<int> temp = {};
     while (temp.length != 3) {
-      temp.add(rand.nextInt(3));
+      temp.add(rand.nextInt(targetNumber));
     }
     setState(() {
       randomNumber = temp.toList();
+    });
+  }
+
+  void setTargetNumber(int target) {
+    setState(() {
+      targetNumber = target;
     });
   }
 }
@@ -79,20 +102,8 @@ class _buildRandomNumber extends StatelessWidget {
             .entries
             .map(
               (x) => Padding(
-                padding: EdgeInsets.only(bottom: x.key == 2 ? 0 : 16),
-                child: Row(
-                  children: x.value
-                      .toString()
-                      .split("")
-                      .map(
-                        (e) => Image.asset(
-                          "asset/img/$e.png",
-                          height: 60,
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
+                  padding: EdgeInsets.only(bottom: x.key == 2 ? 0 : 16),
+                  child: NumberRow(targetNumber: x.value)),
             )
             .toList(),
       ),
@@ -101,6 +112,10 @@ class _buildRandomNumber extends StatelessWidget {
 }
 
 class _top extends StatelessWidget {
+  final targetNumber;
+  final setTargetNumber;
+  _top(this.targetNumber, this.setTargetNumber);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -112,10 +127,17 @@ class _top extends StatelessWidget {
                 color: Colors.white, fontSize: 34, fontWeight: FontWeight.bold),
           ),
         ),
-        Icon(
-          Icons.settings,
-          color: red_color,
-        ),
+        IconButton(
+            icon: Icon(Icons.settings),
+            color: red_color,
+            onPressed: () async {
+              await Get.to(() => SettingScreen(),
+                      arguments: targetNumber,
+                      transition: Transition.rightToLeft)!
+                  .then((result) {
+                setTargetNumber(result[0]["targetNumber"]);
+              });
+            }),
       ],
     );
   }
