@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/domain/movie/movie.dart';
-import 'package:flutter_application/main.dart';
+import 'package:flutter_application/main2.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_application/screen/detail_screen.dart';
 import 'package:get/get.dart';
