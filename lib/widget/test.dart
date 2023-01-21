@@ -4,12 +4,12 @@ import 'package:flutter_application/widget/example/FirstPage.dart';
 import 'package:flutter_application/widget/example/SecondPage.dart';
 import 'package:get/get.dart';
 
-class GetXState extends StatefulWidget {
+class GetXStateTest extends StatefulWidget {
   @override
-  State<GetXState> createState() => _GetXStateState();
+  State<GetXStateTest> createState() => _GetXStateTestState();
 }
 
-class _GetXStateState extends State<GetXState> {
+class _GetXStateTestState extends State<GetXStateTest> {
   final controller = Get.put(CountControllerWithGetx());
 
   @override
