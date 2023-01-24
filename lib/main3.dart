@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
 
   _showSnackBar() {
     Get.snackbar(
-      "Hey Thereef",
+      "Hey There",
       "Snackbar is easy",
       snackPosition: SnackPosition.BOTTOM,
     );
