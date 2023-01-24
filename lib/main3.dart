@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
   _showDialog() {
     Get.defaultDialog(
       title: "Simple Dialog",
-      content: Text("Too Eas"),
+      content: Text("Too Ea"),
     );
   }
 
