@@ -5,8 +5,8 @@ import 'package:get/route_manager.dart';
 void main(List<String> args) {
   runApp(
     GetMaterialApp(
-      debugShowCheckedModeBanner: false,
       home: VideoPlayer(),
+      debugShowCheckedModeBanner: false,
     ),
   );
 }
